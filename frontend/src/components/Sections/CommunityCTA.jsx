@@ -36,7 +36,18 @@ const CommunityCTA = () => {
               Cybersecurity is better when shared. Send SecuSafe to your loved ones and help them avoid dangerous links forever.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-white text-secusafe-700 hover:bg-secusafe-50 font-bold py-5 px-12 rounded-2xl transition-all duration-300 shadow-xl flex items-center gap-3 group">
+              <button 
+                onClick={async () => {
+                  if (navigator.share) {
+                    try { await navigator.share({ title: 'SecuSafe', text: 'Check out SecuSafe - free AI phishing protection!', url: window.location.origin }); }
+                    catch (err) { console.log('Share canceled'); }
+                  } else {
+                    navigator.clipboard.writeText(window.location.origin);
+                    alert('Link copied to clipboard!');
+                  }
+                }}
+                className="bg-white text-secusafe-700 hover:bg-secusafe-50 font-bold py-5 px-12 rounded-2xl transition-all duration-300 shadow-xl flex items-center gap-3 group"
+              >
                 Share SecuSafe
                 <svg className="h-5 w-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />

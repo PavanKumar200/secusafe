@@ -44,7 +44,18 @@ const AwarenessTips = () => {
             <div className="relative z-10 max-w-lg">
               <h3 className="text-2xl font-bold mb-4">Protect your family and friends</h3>
               <p className="text-slate-400 mb-8">Share SecuSafe with people you care about. Help them stay safe from online scams and phishing attempts.</p>
-              <button className="bg-secusafe-500 hover:bg-secusafe-600 text-white font-semibold py-3 px-8 rounded-xl transition-smooth">
+              <button 
+                onClick={async () => {
+                  if (navigator.share) {
+                    try { await navigator.share({ title: 'SecuSafe', text: 'Check out SecuSafe - free AI phishing protection!', url: window.location.origin }); }
+                    catch (err) { console.log('Share canceled'); }
+                  } else {
+                    navigator.clipboard.writeText(window.location.origin);
+                    alert('Link copied to clipboard!');
+                  }
+                }}
+                className="bg-secusafe-500 hover:bg-secusafe-600 text-white font-semibold py-3 px-8 rounded-xl transition-smooth"
+              >
                 Share SecuSafe
               </button>
             </div>

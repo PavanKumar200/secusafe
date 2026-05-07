@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import PersonalActivity from './pages/PersonalActivity';
+import GenericPage from './pages/GenericPage';
 
 // ── Error Boundary – catches any React render crash ───────────────────────────
 class ErrorBoundary extends React.Component {
@@ -138,29 +139,29 @@ const Footer = () => {
             <h5 className="font-bold text-secusafe-900 mb-6">Product</h5>
             <ul className="space-y-4 text-sm text-slate-500">
               <li><Link to="/" className="hover:text-secusafe-500 transition-colors">URL Scanner</Link></li>
-              <li><a href="https://t.me/Spam_scanner_bot" className="hover:text-secusafe-500 transition-colors">Telegram Bot</a></li>
+              <li><a href="https://t.me/Spam_scanner_bot" target="_blank" rel="noopener noreferrer" className="hover:text-secusafe-500 transition-colors">Telegram Bot</a></li>
               <li><Link to="/activity" className="hover:text-secusafe-500 transition-colors">Recent Activity</Link></li>
-              <li><a href="#" className="hover:text-secusafe-500 transition-colors">Bulk Analysis</a></li>
+              <li><Link to="/bulk-analysis" className="hover:text-secusafe-500 transition-colors">Bulk Analysis</Link></li>
             </ul>
           </div>
           
           <div>
             <h5 className="font-bold text-secusafe-900 mb-6">Support</h5>
             <ul className="space-y-4 text-sm text-slate-500">
-              <li><a href="#" className="hover:text-secusafe-500 transition-colors">Safety Center</a></li>
-              <li><a href="#" className="hover:text-secusafe-500 transition-colors">Scam Database</a></li>
-              <li><a href="#" className="hover:text-secusafe-500 transition-colors">API Docs</a></li>
-              <li><a href="#" className="hover:text-secusafe-500 transition-colors">Contact Support</a></li>
+              <li><Link to="/safety-center" className="hover:text-secusafe-500 transition-colors">Safety Center</Link></li>
+              <li><Link to="/scam-database" className="hover:text-secusafe-500 transition-colors">Scam Database</Link></li>
+              <li><Link to="/api-docs" className="hover:text-secusafe-500 transition-colors">API Docs</Link></li>
+              <li><Link to="/contact" className="hover:text-secusafe-500 transition-colors">Contact Support</Link></li>
             </ul>
           </div>
           
           <div>
             <h5 className="font-bold text-secusafe-900 mb-6">Transparency</h5>
             <ul className="space-y-4 text-sm text-slate-500">
-              <li><a href="#" className="hover:text-secusafe-500 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-secusafe-500 transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-secusafe-500 transition-colors">How it Works</a></li>
-              <li><a href="#" className="hover:text-secusafe-500 transition-colors">Open Source</a></li>
+              <li><Link to="/privacy-policy" className="hover:text-secusafe-500 transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms-of-service" className="hover:text-secusafe-500 transition-colors">Terms of Service</Link></li>
+              <li><Link to="/how-it-works" className="hover:text-secusafe-500 transition-colors">How it Works</Link></li>
+              <li><a href="https://github.com/PavanKumar200/secusafe" target="_blank" rel="noopener noreferrer" className="hover:text-secusafe-500 transition-colors">Open Source</a></li>
             </ul>
           </div>
         </div>
@@ -191,6 +192,7 @@ const App = () => { // wrapped
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/activity" element={<PersonalActivity />} />
+            <Route path="/:pageName" element={<GenericPage />} />
           </Routes>
         </main>
         <Footer />
