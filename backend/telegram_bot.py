@@ -118,7 +118,6 @@ def _build_inline_keyboard(scan_id: str, url: str) -> InlineKeyboardMarkup:
     """Build inline keyboard after a scan result."""
     keyboard = [
         [
-            InlineKeyboardButton("📄 Get PDF Report", callback_data=f"pdf:{scan_id}"),
             InlineKeyboardButton("🔁 Scan Another", callback_data="scan_another"),
         ],
         [
