@@ -43,6 +43,7 @@ CORS(app)
 
 # ── In-memory scan cache (scan_id → result) ────────────────────────────────
 _scan_cache: dict = {}
+WHITELIST_FILE = os.path.join(DATA_DIR, "whitelist.csv")
 
 # ── Initialize ML model ────────────────────────────────────────────────────
 detector = PhishingDetector()
@@ -129,6 +130,33 @@ def _run_analysis(url: str) -> dict:
 
     scan_id = str(uuid.uuid4())
     scanned_at = datetime.now(timezone.utc).isoformat()
+
+    # Check whitelist first
+    if os.path.exists(WHITELIST_FILE):
+        with open(WHITELIST_FILE, "r", encoding="utf-8") as f:
+            whitelist_urls = [row.get("url") for row in csv.DictReader(f) if row.get("url")]
+            if url in whitelist_urls:
+                result = {
+                    "url": url,
+                    "scan_id": scan_id,
+                    "scanned_at": scanned_at,
+                    "risk_score": 0,
+                    "ml_score": 0.0,
+                    "intel_boost": 0.0,
+                    "risk_level": "Low 🟢",
+                    "issues": [],
+                    "warnings": [],
+                    "recommendations": ["This site has been verified as a False Positive and marked as safe."],
+                    "recommendation": "This site has been verified as a False Positive and marked as safe.",
+                    "features": {},
+                    "feature_importances": {},
+                    "threat_intel": {"urlhaus": {}, "google_sb": {}, "phishtank": False, "openphish": False},
+                    "domain_info": {"closest_brand": ""},
+                    "key_indicators": {}
+                }
+                _scan_cache[scan_id] = result
+                _append_csv(SCAN_HISTORY_FILE, {"scan_id": scan_id, "url": url, "risk_score": 0, "risk_level": "Low 🟢", "scanned_at": scanned_at})
+                return result
 
     # Scrape
     scraper = WebScraper(url)
@@ -288,11 +316,23 @@ def submit_feedback():
         if not scan_id or correct_label not in (0, 1):
             return jsonify({"error": "scan_id and correct_label (0 or 1) required"}), 400
 
+        scan_result = _scan_cache.get(scan_id, {})
+        url = scan_result.get("url", "")
+        
         _append_csv(FEEDBACK_LOG_FILE, {
             "scan_id": scan_id,
+            "url": url,
             "correct_label": correct_label,
             "submitted_at": datetime.now(timezone.utc).isoformat(),
         })
+
+        if correct_label == 0 and url:
+            _append_csv(WHITELIST_FILE, {
+                "url": url,
+                "added_at": datetime.now(timezone.utc).isoformat(),
+                "from_scan_id": scan_id
+            })
+            
         return jsonify({"message": "Feedback recorded. Thank you!"}), 200
 
     except Exception as e:

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ScanResult = ({ result }) => {
+  const [isReported, setIsReported] = useState(false);
+
   if (!result) return null;
 
   // Safely extract all fields with fallbacks
@@ -255,6 +257,39 @@ const ScanResult = ({ result }) => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* ── Report False Positive ── */}
+          <div className="mt-8 text-center">
+            {isReported ? (
+              <div className="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 bg-emerald-50 px-6 py-3 rounded-xl border border-emerald-100">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Thank you! The site has been whitelisted for future scans.
+              </div>
+            ) : (
+              <button 
+                onClick={async () => {
+                  try {
+                    await fetch('https://secusafe-api.onrender.com/api/feedback', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ scan_id: result.scan_id, correct_label: 0 })
+                    });
+                    setIsReported(true);
+                  } catch (err) {
+                    console.error('Failed to report false positive', err);
+                  }
+                }}
+                className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-red-500 transition-colors"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                Is this a safe site? Report False Positive
+              </button>
+            )}
           </div>
 
         </div>
