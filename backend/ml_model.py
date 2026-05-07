@@ -51,7 +51,7 @@ class PhishingDetector:
             n_estimators=200, class_weight="balanced", random_state=42, n_jobs=-1
         )
         xgb = GradientBoostingClassifier(n_estimators=150, random_state=42)
-        lr = LogisticRegression(max_iter=1000, class_weight="balanced", random_state=42, multi_class='auto')
+        lr = LogisticRegression(max_iter=1000, class_weight="balanced", random_state=42)
         return VotingClassifier(
             estimators=[("rf", rf), ("xgb", xgb), ("lr", lr)],
             voting="soft",
