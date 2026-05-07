@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environment
+.env
+*.env
+
+# Logs
+logs/
+*.log
+
+# Model cache (will be trained on first boot on server)
+# backend/models/trained_model.pkl
+
+# Data files (not needed in deployment)
+backend/data/phishtank_feed.csv
+backend/data/scan_history.csv
+backend/data/feedback_log.csv
+
+# Node
+node_modules/
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
