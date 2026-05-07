@@ -1,0 +1,154 @@
+.result-container {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.risk-summary {
+  background: #f9fafb;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.risk-summary h2 {
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+.url-display {
+  background: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-family: monospace;
+  word-break: break-all;
+  border-left: 4px solid #667eea;
+}
+
+.risk-score-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0;
+}
+
+.score-display {
+  text-align: center;
+}
+
+.score-number {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.risk-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.risk-low { background: #d1fae5; color: #065f46; }
+.risk-medium { background: #fed7aa; color: #92400e; }
+.risk-high { background: #fee2e2; color: #991b1b; }
+
+.recommendation {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  border-left: 4px solid #3b82f6;
+}
+
+.issues-section, .warnings-section, .indicators-section {
+  margin-top: 20px;
+}
+
+.issues-section h3, .warnings-section h3, .indicators-section h3 {
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+.issue-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border-left: 4px solid;
+}
+
+.severity-high { border-left-color: #ef4444; }
+.severity-medium { border-left-color: #f59e0b; }
+.severity-low { border-left-color: #3b82f6; }
+
+.issue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.issue-type {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.severity-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.severity-badge.severity-high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.severity-badge.severity-medium {
+  background: #fed7aa;
+  color: #92400e;
+}
+
+.issue-description {
+  margin: 10px 0;
+  color: #374151;
+}
+
+.issue-detail {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.warning-card {
+  background: #fef3c7;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 4px solid #f59e0b;
+}
+
+.indicator-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.indicator-name {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.indicator-value {
+  color: #6b7280;
+}

@@ -1,0 +1,50 @@
+.fi-chart-panel {
+  background: rgba(30, 41, 59, 0.3);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 28px;
+  margin-top: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.fi-subtitle {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.fi-tooltip {
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #f1f5f9;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.fi-tooltip-name {
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin: 0 0 6px;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.fi-tooltip-val {
+  font-size: 0.85rem;
+  margin: 4px 0;
+  color: #cbd5e1;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(255, 255, 255, 0.05);
+}
+
+.recharts-text {
+  fill: #94a3b8 !important;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
